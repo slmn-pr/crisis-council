@@ -1,8 +1,19 @@
 {
   "name": "crisis-council-2050-backend",
   "version": "1.0.0",
-  "description": "بک‌اند شورای بحران ۲۰۵۰ (بدون وابستگی خارجی)",
+  "description": "شورای بحران ۲۰۵۰ with Express and PostgreSQL",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": ">=18" }
+  "scripts": {
+    "build:client": "node scripts/build-client.cjs",
+    "prestart": "npm run build:client",
+    "start": "node server.js"
+  },
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "express": "^4.21.2",
+    "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
 }
