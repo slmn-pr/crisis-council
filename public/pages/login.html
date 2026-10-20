@@ -1,99 +1,187 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#070b14">
-  <title>ورود به عملیات | شورای بحران ۲۰۵۰</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#070b14" />
+    <title>ورود به عملیات | شورای بحران ۲۰۵۰</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="/js/api.js"></script>
-  <link rel="stylesheet" href="/css/login.css">
-</head>
-<body>
-  <div class="ambient ambient-one" aria-hidden="true"></div>
-  <div class="ambient ambient-two" aria-hidden="true"></div>
+    <script src="../js/api.js"></script>
+    <link rel="stylesheet" href="../css/login.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
 
-  <header class="topbar">
-    <a href="/index.html" class="back-btn">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path d="M14.5 5 7.5 12l7 7M8 12h12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span>بازگشت به خانه</span>
-    </a>
-    <div class="mission-badge"><span class="status-dot"></span> ورود به عملیات</div>
-  </header>
-
-  <main class="login-wrap">
-    <div class="login-intro">
-      <div class="login-icon" aria-hidden="true">🪪</div>
-      <div class="login-eyebrow"><span class="eyebrow-line"></span> پیش از شروع مأموریت <span class="eyebrow-line"></span></div>
-      <h1 class="login-title">هویت مأموریتی خود را بسازید</h1>
-      <p class="login-desc">نام، نام مستعار و آواتار شما در طول عملیات به سایر اعضای تیم نمایش داده می‌شود.</p>
-    </div>
-
-    <section class="login-card" aria-label="اطلاعات مأمور">
-      <div class="card-heading">
-        <div>
-          <span class="card-kicker">AGENT PROFILE</span>
-          <h2>مشخصات مأمور</h2>
-        </div>
-        <span class="required-note"><span class="req">*</span> فیلدهای الزامی</span>
-      </div>
-
-      <div class="field-row">
-        <div class="field-group">
-          <label class="field-label" for="first-name">نام <span class="req">*</span></label>
-          <input type="text" id="first-name" class="text-input" placeholder="مثلاً سارا" autocomplete="given-name" required>
-          <div class="field-error" id="first-name-error" role="alert">لطفاً نام خود را وارد کنید</div>
-        </div>
-        <div class="field-group">
-          <label class="field-label" for="last-name">نام خانوادگی <span class="req">*</span></label>
-          <input type="text" id="last-name" class="text-input" placeholder="مثلاً رضایی" autocomplete="family-name" required>
-          <div class="field-error" id="last-name-error" role="alert">لطفاً نام خانوادگی خود را وارد کنید</div>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="nickname">نام مستعار <span class="req">*</span></label>
-        <input type="text" id="nickname" class="text-input" placeholder="نامی که اعضای تیم می‌بینند" autocomplete="nickname" required>
-        <span class="field-hint">یک نام کوتاه و به‌یادماندنی برای حضور در عملیات انتخاب کنید.</span>
-        <div class="field-error" id="nickname-error" role="alert">لطفاً یک نام مستعار انتخاب کنید</div>
-      </div>
-
-      <div class="field-group avatar-field-group">
-        <div class="avatar-label-row">
-          <label class="field-label" id="avatar-label">انتخاب آواتار <span class="req">*</span></label>
-          <span class="field-hint">نماینده‌ی شما در تیم</span>
-        </div>
-        <div class="avatar-grid" id="avatar-grid" role="group" aria-labelledby="avatar-label"></div>
-        <div class="field-error" id="avatar-error" role="alert">لطفاً یک آواتار انتخاب کنید</div>
-      </div>
-
-      <div class="preview-card" aria-live="polite">
-        <div class="preview-avatar" id="preview-avatar">🙂</div>
-        <div class="preview-info">
-          <div class="preview-label"><span class="preview-live-dot"></span> پیش‌نمایش پروفایل شما</div>
-          <div class="preview-name" id="preview-name">نام و نام خانوادگی</div>
-          <div class="preview-nick" id="preview-nick">نام مستعار</div>
-        </div>
-        <div class="preview-stamp" aria-hidden="true">AGENT<br>2050</div>
-      </div>
-
-      <button class="start-btn" id="submit-btn" type="button" onclick="handleLogin()">
-        <span>ورود به عملیات</span>
-        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M5 12h13m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <header class="topbar">
+      <a href="/index.html" class="back-btn">
+        <svg
+          width="17"
+          height="17"
+          viewBox="0 0 24 24"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M14.5 5 7.5 12l7 7M8 12h12"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
         </svg>
-      </button>
-      <p class="privacy-note"><span aria-hidden="true">◈</span> اطلاعات پروفایل برای شناسایی شما در جریان عملیات استفاده می‌شود.</p>
-    </section>
+        <span>بازگشت به خانه</span>
+      </a>
+      <div class="mission-badge">
+        <span class="status-dot"></span> ورود به عملیات
+      </div>
+    </header>
 
-    <div class="login-footer"><span class="footer-mark">CRISIS COUNCIL</span><span>PROTOCOL 2050 <i></i> SECURE ACCESS</span></div>
-  </main>
+    <main class="login-wrap">
+      <div class="login-intro">
+        <div class="login-icon" aria-hidden="true">🪪</div>
+        <div class="login-eyebrow">
+          <span class="eyebrow-line"></span> پیش از شروع مأموریت
+          <span class="eyebrow-line"></span>
+        </div>
+        <h1 class="login-title">هویت مأموریتی خود را بسازید</h1>
+        <p class="login-desc">
+          نام، نام مستعار و آواتار شما در طول عملیات به سایر اعضای تیم نمایش
+          داده می‌شود.
+        </p>
+      </div>
 
-  <script src="/js/login.js" defer></script>
-</body>
+      <section class="login-card" aria-label="اطلاعات مأمور">
+        <div class="card-heading">
+          <div>
+            <span class="card-kicker">AGENT PROFILE</span>
+            <h2>مشخصات مأمور</h2>
+          </div>
+          <span class="required-note"
+            ><span class="req">*</span> فیلدهای الزامی</span
+          >
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label class="field-label" for="first-name"
+              >نام <span class="req">*</span></label
+            >
+            <input
+              type="text"
+              id="first-name"
+              class="text-input"
+              placeholder="مثلاً سارا"
+              autocomplete="given-name"
+              required
+            />
+            <div class="field-error" id="first-name-error" role="alert">
+              لطفاً نام خود را وارد کنید
+            </div>
+          </div>
+          <div class="field-group">
+            <label class="field-label" for="last-name"
+              >نام خانوادگی <span class="req">*</span></label
+            >
+            <input
+              type="text"
+              id="last-name"
+              class="text-input"
+              placeholder="مثلاً رضایی"
+              autocomplete="family-name"
+              required
+            />
+            <div class="field-error" id="last-name-error" role="alert">
+              لطفاً نام خانوادگی خود را وارد کنید
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="nickname"
+            >نام مستعار <span class="req">*</span></label
+          >
+          <input
+            type="text"
+            id="nickname"
+            class="text-input"
+            placeholder="نامی که اعضای تیم می‌بینند"
+            autocomplete="nickname"
+            required
+          />
+          <span class="field-hint"
+            >یک نام کوتاه و به‌یادماندنی برای حضور در عملیات انتخاب کنید.</span
+          >
+          <div class="field-error" id="nickname-error" role="alert">
+            لطفاً یک نام مستعار انتخاب کنید
+          </div>
+        </div>
+
+        <div class="field-group avatar-field-group">
+          <div class="avatar-label-row">
+            <label class="field-label" id="avatar-label"
+              >انتخاب آواتار <span class="req">*</span></label
+            >
+            <span class="field-hint">نماینده‌ی شما در تیم</span>
+          </div>
+          <div
+            class="avatar-grid"
+            id="avatar-grid"
+            role="group"
+            aria-labelledby="avatar-label"
+          ></div>
+          <div class="field-error" id="avatar-error" role="alert">
+            لطفاً یک آواتار انتخاب کنید
+          </div>
+        </div>
+
+        <div class="preview-card" aria-live="polite">
+          <div class="preview-avatar" id="preview-avatar">🙂</div>
+          <div class="preview-info">
+            <div class="preview-label">
+              <span class="preview-live-dot"></span> پیش‌نمایش پروفایل شما
+            </div>
+            <div class="preview-name" id="preview-name">نام و نام خانوادگی</div>
+            <div class="preview-nick" id="preview-nick">نام مستعار</div>
+          </div>
+          <div class="preview-stamp" aria-hidden="true">AGENT<br />2050</div>
+        </div>
+
+        <button
+          class="start-btn"
+          id="submit-btn"
+          type="button"
+          onclick="handleLogin()"
+        >
+          <span>ورود به عملیات</span>
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M5 12h13m-5-5 5 5-5 5"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <p class="privacy-note">
+          <span aria-hidden="true">◈</span> اطلاعات پروفایل برای شناسایی شما در
+          جریان عملیات استفاده می‌شود.
+        </p>
+      </section>
+
+      <div class="login-footer">
+        <span class="footer-mark">CRISIS COUNCIL</span
+        ><span>PROTOCOL 2050 <i></i> SECURE ACCESS</span>
+      </div>
+    </main>
+
+    <script src="../js/login.js" defer></script>
+  </body>
 </html>

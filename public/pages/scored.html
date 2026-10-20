@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ماموریت ۰۱ – چالش قهرمان مناطق</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap"
-      rel="stylesheet"
-    />
-
     <script src="../js/api.js"></script>
     <link rel="stylesheet" href="../css/scored.css" />
   </head>
@@ -55,9 +50,19 @@
     </div>
 
     <!-- ══ SCREEN 1: INTRO ══ -->
-    <div id="screen-intro" class="screen active">
+    <div id="screen-intro" class="screen active" style="position: relative">
       <div class="intro-wrap">
-        <img src="../assets/scored.webp" />
+        <img
+          src="../assets/scored.webp"
+          style="
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            object-fit: contain;
+            object-position: center;
+          "
+        />
         <div class="intro-icon">🏆</div>
         <div class="intro-eyebrow">ماموریت ۰۱ - سناریو امتیازی</div>
         <h1 class="intro-title">چالش قهرمان مناطق</h1>
@@ -90,6 +95,7 @@
         </div>
 
         <button
+          style="overflow: hidden"
           class="start-btn btn-start-tt"
           onclick="showScreen('screen-rooms')"
         >
