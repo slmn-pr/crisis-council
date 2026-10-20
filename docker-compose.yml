@@ -24,7 +24,8 @@ services:
     environment:
       PORT: 3000
       NODE_ENV: production
-      ADMIN_KEY: ${ADMIN_KEY:-change-me}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:?set ADMIN_USERNAME in .env}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?set ADMIN_PASSWORD in .env}
       PGHOST: db
       PGPORT: 5432
       PGUSER: ${POSTGRES_USER:-crisis}

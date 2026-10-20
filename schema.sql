@@ -25,3 +25,11 @@ CREATE TABLE IF NOT EXISTS results (
 CREATE INDEX IF NOT EXISTS sessions_user_id_idx ON sessions(user_id);
 CREATE INDEX IF NOT EXISTS results_user_created_idx ON results(user_id, created_at);
 CREATE INDEX IF NOT EXISTS results_mission_created_idx ON results(mission, created_at);
+
+
+ALTER TABLE users ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'user'
+  CHECK (role IN ('user', 'admin'));
+ALTER TABLE users ADD COLUMN IF NOT EXISTS username TEXT;
+ALTER TABLE users ADD COLUMN IF NOT EXISTS password_hash TEXT;
+CREATE UNIQUE INDEX IF NOT EXISTS users_username_uidx ON users(username);
+CREATE INDEX IF NOT EXISTS users_role_idx ON users(role);

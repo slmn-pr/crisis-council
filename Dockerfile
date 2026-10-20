@@ -13,5 +13,6 @@ RUN npm ci --omit=dev
 COPY --from=build /app/server.js ./server.js
 COPY --from=build /app/schema.sql ./schema.sql
 COPY --from=build /app/public ./public
+COPY --from=build /app/admin ./admin
 EXPOSE 3000
 CMD ["node", "server.js"]

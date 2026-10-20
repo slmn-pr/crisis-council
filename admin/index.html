@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>پنل مدیریت — شورای بحران ۲۰۵۰</title>
+  <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+  <header class="top">
+    <h1>پنل مدیریت</h1>
+    <nav id="tabs">
+      <button data-tab="overview" class="on">نمای کلی</button>
+      <button data-tab="users">کاربران</button>
+      <button data-tab="results">نتایج</button>
+    </nav>
+    <button id="logout">خروج</button>
+  </header>
+  <main id="view"></main>
+  <dialog id="dlg"><pre id="dlgBody"></pre><button id="dlgClose">بستن</button></dialog>
+  <script src="./admin.js"></script>
+</body>
+</html>
