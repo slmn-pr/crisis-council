@@ -442,15 +442,15 @@ app.get("/api/leaderboard", async (req, res, next) => {
 
 app.use("/api", (req, res) => sendError(res, 404, "not found"));
 app.use(express.static(PUBLIC));
-app.use((req, res) => res.status(404).type("text/plain").send("صفحه پیدا نشد"));
+app.use((req, res) => res.status(404).type("text/plain").send("Page not found"));
 
 app.use((error, req, res, next) => {
   if (res.headersSent) return next(error);
   if (error instanceof SyntaxError && error.status === 400 && "body" in error) {
-    return sendError(res, 400, "درخواست نامعتبر");
+    return sendError(res, 400, "Bad request");
   }
   console.error(error);
-  return sendError(res, 500, "خطای داخلی سرور");
+  return sendError(res, 500, "Internal server error");
 });
 
 async function seedAdmin() {
@@ -469,7 +469,7 @@ async function start() {
   await pool.query(fs.readFileSync(path.join(__dirname, "schema.sql"), "utf8"));
   await seedAdmin();
   app.listen(PORT, () =>
-    console.log(`✅ سرور روی http://localhost:${PORT} اجرا شد`),
+    console.log(`✅ App successfully run on: http://localhost:${PORT}`),
   );
 }
 
