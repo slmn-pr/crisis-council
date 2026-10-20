@@ -1,80 +1,105 @@
 <!doctype html>
 <html lang="fa" dir="rtl">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>ورود مدیر</title>
-    <style>
-      body {
-        font-family: system-ui, Tahoma, sans-serif;
-        display: grid;
-        place-items: center;
-        min-height: 100vh;
-        margin: 0;
-        background: #0f1419;
-        color: #e8ecf1;
-      }
-      form {
-        display: grid;
-        gap: 12px;
-        width: min(340px, 90vw);
-        padding: 24px;
-        background: #1a212b;
-        border-radius: 12px;
-      }
-      input,
-      button {
-        padding: 10px;
-        border-radius: 8px;
-        border: 1px solid #334;
-        background: #0f1419;
-        color: inherit;
-        font: inherit;
-      }
-      button {
-        background: #3b82f6;
-        border: 0;
-        cursor: pointer;
-      }
-      #err {
-        color: #f87171;
-        min-height: 1.2em;
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <form id="f">
-      <h1 style="margin: 0; font-size: 20px">ورود مدیر</h1>
-      <input
-        name="username"
-        placeholder="نام کاربری"
-        autocomplete="username"
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="رمز عبور"
-        autocomplete="current-password"
-        required
-      />
-      <p id="err"></p>
-      <button>ورود</button>
-    </form>
-    <script>
-      document.getElementById("f").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const r = await fetch("/api/admin/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(Object.fromEntries(new FormData(e.target))),
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070b14">
+  <title>ورود مدیر | شورای بحران ۲۰۵۰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: dark; --bg:#070b14; --panel:rgba(15,23,42,.86); --primary:#3b82f6; --secondary:#7c3aed; --accent:#2dd4bf; --text:#f1f5f9; --muted:#94a3b8; --border:rgba(148,163,184,.17); --danger:#fb7185; }
+    *,*::before,*::after{box-sizing:border-box}
+    body{min-height:100vh;margin:0;display:grid;place-items:center;overflow-x:hidden;padding:1.25rem;position:relative;isolation:isolate;background:radial-gradient(ellipse at 50% -10%,rgba(37,99,235,.23),transparent 54%),radial-gradient(ellipse at 100% 100%,rgba(124,58,237,.13),transparent 40%),var(--bg);color:var(--text);font-family:'Vazirmatn',Tahoma,sans-serif;-webkit-font-smoothing:antialiased}
+    body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.3;background-image:linear-gradient(rgba(148,163,184,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(148,163,184,.045) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+    .orb{position:fixed;z-index:-1;width:260px;height:260px;border-radius:50%;filter:blur(90px);opacity:.15;pointer-events:none}.orb-blue{top:12%;inset-inline-start:-120px;background:var(--primary)}.orb-purple{bottom:2%;inset-inline-end:-110px;background:var(--secondary)}
+    .login-shell{width:min(100%,420px)}
+    .brand-row{display:flex;align-items:center;justify-content:center;gap:.75rem;margin-bottom:1.2rem;color:var(--muted);font-size:.75rem;letter-spacing:.08em}
+    .brand-symbol{width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(96,165,250,.3);border-radius:12px;background:linear-gradient(145deg,rgba(59,130,246,.18),rgba(124,58,237,.17));color:#bfdbfe;font-size:1.2rem}
+    .brand-text{display:grid;gap:.15rem}.brand-text strong{color:#e2e8f0;font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:.08em}.brand-text span{color:#64748b;font-size:.65rem;letter-spacing:.02em}
+    .login-card{position:relative;overflow:hidden;padding:clamp(1.35rem,5vw,2.1rem);border:1px solid var(--border);border-radius:24px;background:linear-gradient(145deg,rgba(17,27,46,.94),rgba(9,15,27,.96));box-shadow:0 28px 80px rgba(0,0,0,.3),inset 0 1px rgba(255,255,255,.04)}
+    .login-card::before{content:'';position:absolute;top:0;inset-inline:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(96,165,250,.7),rgba(45,212,191,.38),transparent)}
+    .lock-icon{width:64px;height:64px;display:grid;place-items:center;margin:0 auto 1.15rem;border:1px solid rgba(96,165,250,.25);border-radius:20px;background:linear-gradient(145deg,rgba(59,130,246,.17),rgba(124,58,237,.13));color:#bfdbfe;font-size:1.7rem;box-shadow:0 12px 34px rgba(37,99,235,.12)}
+    .eyebrow{text-align:center;color:var(--accent);font-size:.68rem;font-weight:800;letter-spacing:.13em}
+    h1{margin:.55rem 0 0;text-align:center;font-size:1.65rem;font-weight:900;letter-spacing:-.035em}
+    .intro{margin:.6rem auto 1.7rem;max-width:300px;text-align:center;color:var(--muted);font-size:.84rem;line-height:1.9}
+    form{display:grid;gap:1rem}
+    .field{display:grid;gap:.5rem}.field label{color:#dbe4f0;font-size:.81rem;font-weight:700}
+    .input-wrap{position:relative}
+    input{width:100%;min-height:50px;padding:.8rem .95rem;border:1px solid rgba(148,163,184,.2);border-radius:12px;outline:none;background:rgba(3,7,18,.45);color:var(--text);font:inherit;font-size:.9rem;transition:border-color .2s,box-shadow .2s,background .2s}
+    input::placeholder{color:#64748b}input:hover{border-color:rgba(148,163,184,.34)}input:focus{border-color:#60a5fa;background:rgba(3,7,18,.7);box-shadow:0 0 0 3px rgba(59,130,246,.14)}
+    .input-icon{position:absolute;top:50%;inset-inline-start:.9rem;transform:translateY(-50%);color:#64748b;pointer-events:none;font-size:.95rem}
+    #err{min-height:1.25rem;margin:0;color:var(--danger);font-size:.78rem;line-height:1.7}
+    .submit-btn{width:100%;min-height:52px;display:flex;align-items:center;justify-content:center;gap:.6rem;border:1px solid rgba(147,197,253,.3);border-radius:12px;background:linear-gradient(105deg,#2563eb,#4f46e5 58%,#7c3aed);color:white;font:inherit;font-size:.91rem;font-weight:800;cursor:pointer;box-shadow:0 12px 28px rgba(59,130,246,.19),inset 0 1px rgba(255,255,255,.15);transition:transform .2s,filter .2s,box-shadow .2s}
+    .submit-btn:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 16px 34px rgba(79,70,229,.27)}.submit-btn:focus-visible{outline:2px solid var(--accent);outline-offset:4px}.submit-btn:disabled{opacity:.62;cursor:wait;transform:none;box-shadow:none}
+    .security-note{display:flex;align-items:center;justify-content:center;gap:.45rem;margin:1.25rem 0 0;color:#64748b;font-size:.68rem}.security-note span{color:var(--accent)}
+    .footer{margin-top:1.25rem;text-align:center;color:#475569;font:600 .55rem 'Orbitron',monospace;letter-spacing:.12em}
+    @media(max-width:420px){body{padding:1rem}.brand-row{margin-bottom:1rem}.login-card{border-radius:20px}h1{font-size:1.45rem}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <div class="orb orb-blue" aria-hidden="true"></div><div class="orb orb-purple" aria-hidden="true"></div>
+  <main class="login-shell">
+    <div class="brand-row">
+      <div class="brand-symbol" aria-hidden="true">⌘</div>
+      <div class="brand-text"><strong>CRISIS COUNCIL</strong><span>MISSION CONTROL · 2050</span></div>
+    </div>
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="lock-icon" aria-hidden="true">⌑</div>
+      <div class="eyebrow">RESTRICTED ACCESS</div>
+      <h1 id="login-title">ورود مدیر</h1>
+      <p class="intro">برای ورود به پنل مدیریت، اطلاعات حساب خود را وارد کنید.</p>
+      <form id="f">
+        <div class="field">
+          <label for="username">نام کاربری</label>
+          <div class="input-wrap"><input id="username" name="username" placeholder="نام کاربری مدیر" autocomplete="username" required><span class="input-icon" aria-hidden="true">♙</span></div>
+        </div>
+        <div class="field">
+          <label for="password">رمز عبور</label>
+          <div class="input-wrap"><input id="password" name="password" type="password" placeholder="رمز عبور حساب" autocomplete="current-password" required><span class="input-icon" aria-hidden="true">⌑</span></div>
+        </div>
+        <p id="err" role="alert" aria-live="polite"></p>
+        <button class="submit-btn" id="submit-btn" type="submit"><span>ورود به پنل مدیریت</span><span aria-hidden="true">←</span></button>
+      </form>
+      <p class="security-note"><span aria-hidden="true">◈</span> دسترسی محدود به مدیران سامانه</p>
+    </section>
+    <div class="footer">SECURE ADMIN TERMINAL · 2050</div>
+  </main>
+  <script>
+    const form = document.getElementById('f');
+    const errorMessage = document.getElementById('err');
+    const submitButton = document.getElementById('submit-btn');
+    const defaultButtonContent = submitButton.innerHTML;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorMessage.textContent = '';
+      submitButton.disabled = true;
+      submitButton.textContent = 'در حال بررسی اطلاعات…';
+
+      try {
+        const response = await fetch('/api/admin/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
         });
-        if (r.ok) location.href = "/admin/";
-        else
-          document.getElementById("err").textContent =
-            (await r.json().catch(() => ({}))).error || "خطا";
-      });
-    </script>
-  </body>
+
+        if (response.ok) {
+          window.location.href = '/admin/';
+          return;
+        }
+
+        const result = await response.json().catch(() => ({}));
+        errorMessage.textContent = result.error || 'نام کاربری یا رمز عبور صحیح نیست.';
+      } catch (error) {
+        errorMessage.textContent = 'ارتباط با سرور برقرار نشد. اتصال خود را بررسی کنید و دوباره تلاش کنید.';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = defaultButtonContent;
+      }
+    });
+  </script>
+</body>
 </html>
